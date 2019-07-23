@@ -14,41 +14,32 @@ SELECT COUNT(id) FROM recipes WHERE gluten_free = 't' AND vegetarian = 'f';
 
 
 5. Find the animal with the most legs.
-	SELECT * FROM animals WHERE MAX(number_of_legs);
-	SELECT name, MAX(number_of_legs), flying, swimming, egg_laying FROM animals GROUP BY id;
-
-
-
-	SELECT *
-	FROM animals
-	ORDER BY COUNT(number_of_legs) DESC;
-
-
-
-	select * from table 
-	where (id,point) IN (select id,min(point) from table group by id);
+SELECT * FROM animals GROUP BY id ORDER BY number_of_legs DESC LIMIT 1;
 
 
 6. Find the board game that takes the least amount of time to play.
-
 SELECT * FROM board_games GROUP BY id ORDER BY mins_to_play ASC LIMIT 2;
-
-	
 
 
 7. Find the recipe that takes the most time to prepare.
+SELECT * FROM recipes GROUP BY id ORDER BY minutes_required DESC LIMIT 1;
 
 
 8. Find all the robots whose name starts with the letter M.
+SELECT * FROM robots WHERE name LIKE 'M%'
 
 
 9. Count the number of board games that can be played by 8 people.
+SELECT * FROM board_games WHERE max_players <= 8;
 
 
 10. Find all animals that are swimming and egg-laying.
+SELECT * FROM animals WHERE swimming='t' AND egg_laying='t';
 
 
 11. Find all animals that are swimming and egg-laying but not flying.
+SELECT * FROM animals WHERE swimming='t' AND egg_laying='t' AND NOT flying='t';
 
 
 12. Find the board game that supports the largest number of people.
+SELECT * FROM board_games WHERE max_players = (SELECT MAX(max_players) FROM board_games);
